@@ -1,0 +1,85 @@
+﻿@model CustomerDueDiligence.ViewModels.CustomerFormViewModel
+@{
+    /**/
+
+    ViewBag.Title = "CustomerForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section styles{
+    @Styles.Render("~/Content/forms-css")
+}
+
+@section header{
+    <h1>
+        Customer Form
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="@Url.Action("Index", "Home")"><i class="fa fa-dashboard"></i>Home</a></li>
+        <li class="active">Customer Form</li>
+    </ol>
+}
+
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="box box-warning">
+            @using (Html.BeginForm("Save", "Customers"))
+            {
+                <div class="box-header with-border">
+                    New Customer
+                </div>
+                <div class="box-body">
+                    @Html.ValidationSummary(true, "Please fix the following")
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Customer.Lastname)
+                        @Html.TextBoxFor(m => m.Customer.Lastname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Customer.Lastname)
+                    </div>
+
+                    <div class="form-group">
+                        
+                        @Html.LabelFor(m => m.Customer.Firstname)
+                            @Html.TextBoxFor(m => m.Customer.Firstname, new { @class = "form-control", @id = "cu" })
+                            @Html.ValidationMessageFor(m => m.Customer.Firstname)
+
+                        </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Customer.AccountTypeId)
+                        @Html.DropDownListFor(m => m.Customer.AccountTypeId, new SelectList(Model.AccountTypes, "Id", "Name"), "Select Account Type", new { @class = "form-control select2" })
+                        @Html.ValidationMessageFor(m => m.Customer.AccountTypeId)
+                    </div>
+                </div>
+                <div class="box-footer">
+                    @Html.HiddenFor(m => m.Customer.Id)
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
+@section additionalScripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/forms-js")
+
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.select2').select2()
+
+
+
+        });
+    </script>
+}

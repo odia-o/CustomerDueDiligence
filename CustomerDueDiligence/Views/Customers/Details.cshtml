@@ -1,0 +1,16 @@
+﻿@model CustomerDueDiligence.Models.Customer
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+
+<ul>
+    @if (Model.AccountType.Name.Any())
+    {
+        <li>Membershipship Type - @Model.AccountType.Name</li>
+    }
+</ul>
+

@@ -20,6 +20,21 @@ namespace CustomerDueDiligence.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Customer> Customers { get; set; }
+
+        public DbSet<AccountType> AccountTypes { get; set; }
+
+        public DbSet<Question> Questions { get; set; }
+
+        public DbSet<QuestionCategory> QuestionCategories { get; set; }
+
+        public DbSet<QuestionType> QuestionTypes { get; set; }
+
+        public DbSet<RAM> RAMs { get; set; }
+
+        public DbSet<Option> Options { get; set; }
+
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
